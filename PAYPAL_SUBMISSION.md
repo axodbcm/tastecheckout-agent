@@ -1,6 +1,6 @@
 # PayPal AI Hackathon submission draft
 
-Status: **prepared locally; not registered, published, filmed, or submitted**.
+Status: **public source repository; hosted demo, live smoke test, video, registration, and submission pending**.
 
 ## Project name
 
@@ -106,7 +106,7 @@ PAYPAL_CANCEL_URL=https://YOUR-DEMO/?paypal=cancel
 - [x] Server-side Sandbox Orders v2 implementation
 - [x] Human-approval and payer-approval tests
 - [x] Architecture, evaluation, traces, and security documentation
-- [ ] Public GitHub repository URL — requires owner approval
+- [x] Public GitHub repository URL — https://github.com/axodbcm/tastecheckout-agent
 - [ ] Hosted demo URL or judge-ready repository — requires owner approval
 - [ ] Public YouTube demo under three minutes — required; requires owner approval
 - [ ] Devpost registration and final submission — requires owner action

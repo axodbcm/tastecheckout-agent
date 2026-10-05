@@ -117,7 +117,9 @@ See [EVALUATION.md](./EVALUATION.md), [ARCHITECTURE.md](./ARCHITECTURE.md), and 
 - [QLOO_SUBMISSION.md](./QLOO_SUBMISSION.md) maps the product to Qloo's four judging criteria and live-demo requirements.
 - [PAYPAL_SUBMISSION.md](./PAYPAL_SUBMISSION.md) maps the product to PayPal's five judging criteria and includes a sub-three-minute demo script.
 
-These files are drafts. This repository has not been published and no hackathon submission has been created.
+These files are drafts. The source repository is public at
+<https://github.com/axodbcm/tastecheckout-agent>, but no hosted demo or
+hackathon submission has been created yet.
 
 ## Official references
 

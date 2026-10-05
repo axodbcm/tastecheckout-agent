@@ -1,6 +1,6 @@
 # Qloo Agentic Hackathon submission draft
 
-Status: **prepared locally; not registered, published, or submitted**.
+Status: **public source repository; live demo, registration, and submission pending**.
 
 ## Project name
 
@@ -98,12 +98,14 @@ The official event kit requires Node.js 22.19 or newer and
 - [x] Complete source code and environment template
 - [x] Deterministic no-key mode
 - [x] Architecture, evaluation, security, and traces
-- [ ] Public GitHub repository URL — requires owner approval
+- [x] Public GitHub repository URL — https://github.com/axodbcm/tastecheckout-agent
 - [ ] Externally hosted live demo URL — required by Qloo; requires owner approval
 - [ ] Devpost registration and final submission — requires owner action
 - [ ] Live Qloo smoke test — requires a Qloo hackathon API key
 
-The Qloo overview explicitly requires a fully published external demo and public open-source repository. A local-only build does not qualify; those final publication steps have intentionally not been performed.
+The Qloo overview explicitly requires a fully published external demo and public
+open-source repository. The repository requirement is complete; the hosted demo,
+live Qloo smoke test, and Devpost submission are still pending.
 
 ## Development assistance disclosure
 
