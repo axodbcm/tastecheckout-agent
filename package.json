@@ -1,0 +1,19 @@
+{
+  "name": "tastecheckout-agent",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A human-approved cultural gift agent powered by Qloo, Channel3 discovery, and PayPal Sandbox checkout.",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test",
+    "build": "node scripts/build.js",
+    "evaluate": "node scripts/evaluate.js",
+    "check": "npm test && npm run evaluate && npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

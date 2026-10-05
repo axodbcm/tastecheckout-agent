@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TasteCheckout turns cultural affinities into thoughtful gifts, then keeps a human in control of PayPal checkout.">
+  <title>TasteCheckout — gifts with cultural intelligence</title>
+  <link rel="icon" href="/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <a class="skip-link" href="#gift-form">Skip to gift brief</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="TasteCheckout home">
+      <img src="/mark.svg" alt="" width="36" height="36">
+      <span>TasteCheckout</span>
+    </a>
+    <div class="mode-pill" id="mode-pill" aria-live="polite"><span></span> Checking adapters</div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="eyebrow">Cultural intelligence → considered commerce</div>
+      <h1 id="hero-title">Find the gift that feels <em>uncannily right.</em></h1>
+      <p class="hero-copy">Qloo maps what they love. A shopping agent translates those affinities into real gift territory. You choose what moves forward—and PayPal never charges without approval.</p>
+      <ul class="trust-row" aria-label="Product safeguards">
+        <li><span>01</span> Qloo-grounded</li>
+        <li><span>02</span> Budget-aware</li>
+        <li><span>03</span> Human-approved</li>
+      </ul>
+    </section>
+
+    <section class="workspace" aria-label="Gift planning workspace">
+      <aside class="brief-panel">
+        <div class="section-kicker">The brief</div>
+        <h2>Who are we shopping for?</h2>
+        <p>Give the agent a few strong signals. Specific tastes beat generic demographics.</p>
+
+        <form id="gift-form" novalidate>
+          <div class="field-pair">
+            <label>Recipient
+              <input name="recipient" autocomplete="off" required maxlength="60" value="Maya">
+            </label>
+            <label>Relationship
+              <input name="relationship" autocomplete="off" required maxlength="60" value="close friend">
+            </label>
+          </div>
+
+          <label>Occasion
+            <select name="occasion" required>
+              <option>Birthday</option>
+              <option>Thank you</option>
+              <option>Housewarming</option>
+              <option>Anniversary</option>
+              <option>Just because</option>
+            </select>
+          </label>
+
+          <label>Tastes and cultural touchstones
+            <textarea name="tastes" rows="3" required aria-describedby="taste-help">Studio Ghibli, jazz, hiking, Japanese craft</textarea>
+          </label>
+          <span class="field-help" id="taste-help">Add 2–6 artists, films, hobbies, places, cuisines, or aesthetics.</span>
+
+          <div class="field-pair budget-row">
+            <label>Budget
+              <input name="budget" type="number" min="20" max="5000" step="1" required value="85">
+            </label>
+            <label>Currency
+              <select name="currency">
+                <option>USD</option>
+                <option>EUR</option>
+                <option>GBP</option>
+                <option>CAD</option>
+                <option>AUD</option>
+              </select>
+            </label>
+          </div>
+
+          <label>Avoid
+            <input name="avoid" autocomplete="off" maxlength="240" placeholder="e.g. alcohol, leather, clutter">
+          </label>
+
+          <label>One useful detail <span class="optional">optional</span>
+            <textarea name="note" rows="2" maxlength="240" placeholder="Small apartment; prefers experiences and useful objects."></textarea>
+          </label>
+
+          <button class="primary-button" type="submit">
+            <span>Map their taste</span><span aria-hidden="true">→</span>
+          </button>
+        </form>
+      </aside>
+
+      <section class="results-panel" aria-labelledby="results-title">
+        <div id="empty-state" class="empty-state">
+          <div class="orb" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="section-kicker">Taste map waiting</p>
+          <h2 id="results-title">From signals to something meaningful.</h2>
+          <p>Your shortlist will show the cultural reasoning, price, and payment boundary for every recommendation.</p>
+        </div>
+
+        <div id="loading-state" class="loading-state" hidden role="status">
+          <div class="agent-pulse" aria-hidden="true"></div>
+          <p class="section-kicker">Agent in motion</p>
+          <h2>Crossing cultural domains…</h2>
+          <ol>
+            <li class="active">Resolving tastes with Qloo</li>
+            <li>Searching gift territory</li>
+            <li>Ranking within your budget</li>
+          </ol>
+        </div>
+
+        <div id="results" hidden>
+          <div class="results-heading">
+            <div>
+              <p class="section-kicker">Qloo taste map</p>
+              <h2>A shortlist with reasons.</h2>
+            </div>
+            <button id="trace-toggle" class="text-button" type="button" aria-expanded="false" aria-controls="trace-panel">View agent trace</button>
+          </div>
+
+          <p id="taste-insight" class="taste-insight"></p>
+          <div id="affinity-list" class="affinity-list" aria-label="Top cultural affinities"></div>
+          <div id="recommendations" class="recommendation-grid" role="radiogroup" aria-label="Gift recommendations"></div>
+
+          <section class="approval-card" aria-labelledby="approval-title">
+            <div class="lock-mark" aria-hidden="true">✓</div>
+            <div>
+              <p class="section-kicker">Human checkpoint</p>
+              <h3 id="approval-title">Nothing reaches PayPal until you approve.</h3>
+              <p>Select one gift, review its price, then explicitly unlock Sandbox order creation.</p>
+              <label class="check-row">
+                <input id="review-check" type="checkbox">
+                <span>I reviewed the selected gift and its total price.</span>
+              </label>
+              <button id="approve-button" class="primary-button compact" type="button" disabled>Approve gift & create PayPal order</button>
+            </div>
+          </section>
+
+          <section id="checkout-panel" class="checkout-panel" hidden aria-labelledby="checkout-title">
+            <div class="checkout-header">
+              <div>
+                <p class="section-kicker">Server-side checkout</p>
+                <h3 id="checkout-title">PayPal order</h3>
+              </div>
+              <span id="order-status" class="status-badge"></span>
+            </div>
+            <div id="order-summary" class="order-summary"></div>
+            <p id="checkout-guidance" class="checkout-guidance"></p>
+            <div class="checkout-actions">
+              <a id="paypal-link" class="primary-button compact" href="#" target="_blank" rel="noopener" hidden>Approve in PayPal Sandbox</a>
+              <button id="demo-payer-button" class="secondary-button" type="button" hidden>Simulate payer approval</button>
+              <button id="capture-button" class="secondary-button" type="button">Verify approval & capture</button>
+            </div>
+          </section>
+
+          <section id="trace-panel" class="trace-panel" hidden aria-labelledby="trace-title">
+            <h3 id="trace-title">Agent trace</h3>
+            <ol id="trace-list"></ol>
+          </section>
+        </div>
+      </section>
+    </section>
+
+    <section class="boundary-strip" aria-label="Integration boundaries">
+      <div><strong>Qloo</strong><span>Cultural grounding</span></div>
+      <div aria-hidden="true">→</div>
+      <div><strong>Channel3</strong><span>Discovery only</span></div>
+      <div aria-hidden="true">→</div>
+      <div><strong>You</strong><span>Selection + approval</span></div>
+      <div aria-hidden="true">→</div>
+      <div><strong>PayPal</strong><span>Sandbox checkout</span></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>TasteCheckout is a hackathon prototype. Demo mode never moves money.</p>
+    <p>Qloo and PayPal remain central; Channel3 is intentionally limited to product discovery.</p>
+  </footer>
+
+  <div id="status-message" class="sr-only" role="status" aria-live="polite"></div>
+  <div id="error-toast" class="error-toast" role="alert" hidden></div>
+</body>
+</html>

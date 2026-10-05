@@ -1,0 +1,137 @@
+# TasteCheckout
+
+**Culturally fluent gifting with a human-approved payment boundary.**
+
+TasteCheckout is an agentic gift-shopping application built around two central capabilities:
+
+1. **Qloo** resolves a recipient's stated interests into cross-domain cultural affinities.
+2. **PayPal Orders v2** creates and captures a Sandbox order only after explicit human and payer approval.
+
+Channel3 is an optional discovery adapter. It searches structured products, but it is deliberately **not** used for checkout because Channel3 currently documents `/checkout` as coming soon. PayPal remains the only checkout provider.
+
+The repository runs end-to-end without credentials in deterministic demo mode. Live adapters are enabled independently with environment variables, so judges can inspect the complete integration without exposing secrets to the browser.
+
+## Why it exists
+
+Generic gift recommenders optimize for popularity. TasteCheckout optimizes for *recognition*: the feeling that a gift reflects a real person rather than a demographic segment. It turns cultural signals—artists, films, places, food, design, hobbies—into explainable gift territory, applies budget and exclusion constraints, and then stops for human review.
+
+## Product flow
+
+1. A person enters a recipient brief, budget, tastes, and exclusions.
+2. Qloo resolves those inputs and returns cross-domain affinities with explainability enabled.
+3. The agent composes a culturally grounded product query.
+4. Channel3 (or the deterministic demo catalog) discovers candidate products.
+5. The agent ranks candidates by cultural fit, budget fit, and exclusions.
+6. A human selects one item and checks an explicit approval control.
+7. The server—not the browser—creates a PayPal Sandbox order.
+8. The payer approves in PayPal Sandbox.
+9. The server verifies that PayPal reports `APPROVED`; only then can it call capture.
+
+## Quick start: no keys required
+
+Requirements: Node.js 20 or newer for demo mode. Live Qloo judging uses the
+official harness and requires Node.js 22.19 or newer.
+
+```bash
+npm start
+```
+
+Open `http://localhost:4173`. The default configuration uses deterministic Qloo, catalog, and PayPal adapters. Demo mode mirrors the real workflow and state transitions but never moves money.
+
+Run the full verification suite:
+
+```bash
+npm run check
+```
+
+## Configure real adapters
+
+Copy `.env.example` to `.env` using your preferred local environment loader, or export the variables in your shell. This project intentionally does not include a dotenv dependency; hosted platforms can inject the same variables directly.
+
+| Variable | Purpose | Exposure |
+| --- | --- | --- |
+| `QLOO_MODE=live` | Enables live Qloo workflows | Server only |
+| `QLOO_SURFACE=harness` | Uses the event-supported `qloo exec` surface | Server only |
+| `QLOO_API_KEY` | Optional server injection of the event credential | Server only |
+| `QLOO_COMMAND` | Harness command; defaults to `qloo` | Server only |
+| `CATALOG_MODE=live` | Enables Channel3 discovery | Server only |
+| `CHANNEL3_API_KEY` | Channel3 `x-api-key` credential | Server only |
+| `PAYPAL_MODE=live` | Enables PayPal Sandbox Orders v2 | Server only |
+| `PAYPAL_CLIENT_ID` | PayPal Sandbox OAuth client ID | Server only |
+| `PAYPAL_CLIENT_SECRET` | PayPal Sandbox OAuth secret | Server only |
+| `PAYPAL_BASE_URL` | Must contain `sandbox.paypal.com` | Server only |
+| `APPROVAL_SECRET` | Signs immutable plan approvals | Server only |
+
+Example PowerShell session:
+
+```powershell
+$env:QLOO_MODE="live"
+$env:QLOO_API_KEY="..."
+$env:CATALOG_MODE="live"
+$env:CHANNEL3_API_KEY="..."
+$env:PAYPAL_MODE="live"
+$env:PAYPAL_CLIENT_ID="..."
+$env:PAYPAL_CLIENT_SECRET="..."
+$env:APPROVAL_SECRET="replace-with-a-long-random-value"
+npm start
+```
+
+Before live judging, install `@qloo/qloo-harness` 0.1.26 or newer and run
+`qloo setup --qloo`, or inject the event key into the server environment. The
+adapter runs four validated `qloo exec recommend` workflows with explainability
+enabled. The key stays in the harness/private server process and never reaches
+the browser. A legacy direct adapter remains isolated for contract comparison,
+but it is not the default event surface.
+
+## API surface
+
+| Method | Route | Purpose |
+| --- | --- | --- |
+| `GET` | `/api/health` | Adapter modes and enforced safeguards |
+| `POST` | `/api/plans` | Build a culturally grounded gift plan |
+| `GET` | `/api/plans/:id/traces` | Inspect the agent trace |
+| `POST` | `/api/plans/:id/approve` | Human approval; creates a PayPal order server-side |
+| `POST` | `/api/demo/orders/:id/payer-approve` | Demo-only payer transition |
+| `POST` | `/api/orders/:id/capture` | Re-check PayPal status and capture if `APPROVED` |
+| `GET` | `/api/orders/:id` | Read checkout state |
+
+The approval endpoint requires all three of these server-validated inputs:
+
+- a product ID from the immutable recommendation set;
+- the plan's HMAC approval token;
+- the exact explicit confirmation phrase generated by the reviewed UI action.
+
+Capture does not trust a browser-supplied `payerApproved` flag. The server requests the order state from PayPal and blocks capture unless PayPal itself reports `APPROVED`.
+
+## Evaluation and tests
+
+- `npm test` covers adapter contracts, deterministic behavior, input validation, integration boundaries, human approval, payer approval, and premature capture rejection.
+- `npm run evaluate` runs four repeatable gifting scenarios and checks budget compliance, Qloo grounding, determinism, and trace completeness.
+- `npm run build` creates a deployable Node artifact under `dist/`.
+- `npm run check` runs all three commands in sequence.
+
+See [EVALUATION.md](./EVALUATION.md), [ARCHITECTURE.md](./ARCHITECTURE.md), and [SECURITY.md](./SECURITY.md) for the evidence and design rationale.
+
+## Submission packs
+
+- [QLOO_SUBMISSION.md](./QLOO_SUBMISSION.md) maps the product to Qloo's four judging criteria and live-demo requirements.
+- [PAYPAL_SUBMISSION.md](./PAYPAL_SUBMISSION.md) maps the product to PayPal's five judging criteria and includes a sub-three-minute demo script.
+
+These files are drafts. This repository has not been published and no hackathon submission has been created.
+
+## Official references
+
+Requirements were checked on 2026-10-04:
+
+- [Qloo Agentic Hackathon overview](https://qloo.devpost.com/)
+- [Qloo official rules](https://qloo.devpost.com/rules)
+- [Qloo hackathon developer guide](https://docs.qloo.com/reference/qloo-llm-hackathon-developer-guide)
+- [Official Qloo Hackathon Kit](https://github.com/qloo/qloo-hackathon-kit)
+- [PayPal AI Hackathon overview](https://paypalaihackathon.devpost.com/)
+- [PayPal official rules](https://paypalaihackathon.devpost.com/rules)
+- [PayPal Orders v2 integration guide](https://developer.paypal.com/api/rest/integration/orders-api)
+- [Channel3 developer overview](https://www.trychannel3.com/developers)
+
+## License
+
+MIT. See [LICENSE](./LICENSE).
