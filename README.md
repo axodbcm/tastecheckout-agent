@@ -11,6 +11,14 @@ Channel3 is an optional discovery adapter. It searches structured products, but 
 
 The repository runs end-to-end without credentials in deterministic demo mode. Live adapters are enabled independently with environment variables, so judges can inspect the complete integration without exposing secrets to the browser.
 
+- Public demo: <https://tastecheckout-agent.onrender.com>
+- Qloo submission: <https://devpost.com/software/tastecheckout>
+- Source: <https://github.com/axodbcm/tastecheckout-agent>
+
+The hosted service is intentionally in disclosed demo mode until Qloo delivers
+the requested event key. It never presents deterministic output as a live API
+response.
+
 ## Why it exists
 
 Generic gift recommenders optimize for popularity. TasteCheckout optimizes for *recognition*: the feeling that a gift reflects a real person rather than a demographic segment. It turns cultural signals—artists, films, places, food, design, hobbies—into explainable gift territory, applies budget and exclusion constraints, and then stops for human review.
@@ -124,10 +132,9 @@ See [EVALUATION.md](./EVALUATION.md), [ARCHITECTURE.md](./ARCHITECTURE.md), and 
 - [QLOO_SUBMISSION.md](./QLOO_SUBMISSION.md) maps the product to Qloo's four judging criteria and live-demo requirements.
 - [PAYPAL_SUBMISSION.md](./PAYPAL_SUBMISSION.md) maps the product to PayPal's five judging criteria and includes a sub-three-minute demo script.
 
-These files are drafts. The source repository is public at
-<https://github.com/axodbcm/tastecheckout-agent>. Qloo registration is complete
-and a Devpost project draft exists, but there is no hosted demo or final
-hackathon submission yet.
+These files remain editable working documents. The source repository, hosted
+demo, and Qloo Devpost submission are public. The live Qloo smoke test is
+pending delivery of the event key requested on 2026-10-06.
 
 ## Official references
 

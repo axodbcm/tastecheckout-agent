@@ -4,6 +4,10 @@ TasteCheckout needs a server runtime because Qloo credentials must never reach
 the browser. The included container pins the Node.js version required by the
 official Qloo Hackathon Kit.
 
+Current public deployment: <https://tastecheckout-agent.onrender.com>. It runs
+on Render's free Docker service in disclosed demo mode until the event key is
+delivered. The service may take roughly a minute to wake after inactivity.
+
 ## Minimum hosted configuration
 
 Build the repository with `Dockerfile`, expose the platform-provided `PORT`,
