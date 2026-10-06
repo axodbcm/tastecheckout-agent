@@ -1,6 +1,6 @@
 # PayPal AI Hackathon submission
 
-Status: **public source repository and hosted demo complete; PayPal Sandbox smoke test, video, registration, and submission pending**.
+Status: **PayPal registration and Devpost draft complete; PayPal Sandbox smoke test, video, and final submission pending**.
 
 ## Project name
 
@@ -108,19 +108,19 @@ PAYPAL_CANCEL_URL=https://YOUR-DEMO/?paypal=cancel
 - [x] Architecture, evaluation, traces, and security documentation
 - [x] Public GitHub repository URL — https://github.com/axodbcm/tastecheckout-agent
 - [x] Hosted demo URL and judge-ready public repository — https://tastecheckout-agent.onrender.com and https://github.com/axodbcm/tastecheckout-agent
-- [ ] Public YouTube demo under three minutes — required; requires owner approval
-- [ ] Devpost registration and final submission — requires owner action
+- [ ] Public YouTube demo under three minutes — required; no video URL yet
+- [x] Devpost registration and TasteCheckout draft — Devpost shows `3/5 steps done`
+- [ ] Final Devpost submission — blocked until video and Sandbox evidence are ready
 - [ ] Live Sandbox smoke test — requires PayPal Sandbox credentials
 
 ## Current readiness
 
-The implementation is ready for the PayPal entry, but the entry itself has not
-been submitted. The remaining submission work is operational: create or access
-a PayPal Developer Sandbox account, configure server-side Sandbox credentials,
-run create → payer approval → retrieve → capture end to end, record a public
-YouTube video under three minutes, join the hackathon, complete the Devpost
-fields, and submit before the deadline. The hosted demo may remain in disclosed
-demo mode until the Sandbox smoke test is complete.
+The implementation is ready for the PayPal entry, and registration plus the
+Devpost draft are complete. The remaining work is operational: access a PayPal
+Developer Sandbox account, configure server-side credentials, run create →
+payer approval → retrieve → capture end to end, record a public YouTube video
+under three minutes, and submit before the deadline. The hosted demo may remain
+in disclosed demo mode until the Sandbox smoke test is complete.
 
 ## Tools used
 
