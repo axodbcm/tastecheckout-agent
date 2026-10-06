@@ -44,7 +44,7 @@ The product only becomes useful because Qloo can connect preferences across doma
 ## Technology
 
 - Qloo Hackathon Kit: `qloo exec recommend` (0.1.26 or newer)
-- Node.js 20 server and agent pipeline
+- Node.js 22.19 server and agent pipeline
 - Optional Channel3 `POST /v1/search` discovery adapter
 - PayPal Sandbox Orders v2 for the separate commerce boundary
 - Accessible vanilla web frontend
@@ -96,11 +96,13 @@ The official event kit requires Node.js 22.19 or newer and
 - [x] English description and test instructions
 - [x] Open-source MIT license
 - [x] Complete source code and environment template
+- [x] Official Qloo harness 0.1.26 pinned in the lockfile
+- [x] Reproducible Node 22.19 container and deployment runbook
 - [x] Deterministic no-key mode
 - [x] Architecture, evaluation, security, and traces
 - [x] Public GitHub repository URL — https://github.com/axodbcm/tastecheckout-agent
-- [ ] Externally hosted live demo URL — required by Qloo; requires owner approval
-- [ ] Devpost registration and final submission — requires owner action
+- [ ] Externally hosted live demo URL — required by Qloo
+- [ ] Devpost registration and final submission — GitHub authorization pending
 - [ ] Live Qloo smoke test — requires a Qloo hackathon API key
 
 The Qloo overview explicitly requires a fully published external demo and public

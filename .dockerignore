@@ -1,0 +1,11 @@
+.git
+.github
+.env
+.qloo
+node_modules
+dist
+coverage
+*.log
+Dockerfile*
+README.md
+*_SUBMISSION.md

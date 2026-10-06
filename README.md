@@ -29,8 +29,8 @@ Generic gift recommenders optimize for popularity. TasteCheckout optimizes for *
 
 ## Quick start: no keys required
 
-Requirements: Node.js 20 or newer for demo mode. Live Qloo judging uses the
-official harness and requires Node.js 22.19 or newer.
+Requirements: Node.js 22.19 or newer. This matches the official Qloo harness
+runtime and avoids a local/hosted version mismatch.
 
 ```bash
 npm start
@@ -76,12 +76,19 @@ $env:APPROVAL_SECRET="replace-with-a-long-random-value"
 npm start
 ```
 
-Before live judging, install `@qloo/qloo-harness` 0.1.26 or newer and run
-`qloo setup --qloo`, or inject the event key into the server environment. The
+The official `@qloo/qloo-harness` is installed and pinned at 0.1.26. Run
+`qloo setup --qloo` for a local session, or inject the event key into the hosted
+server environment. The
 adapter runs four validated `qloo exec recommend` workflows with explainability
 enabled. The key stays in the harness/private server process and never reaches
 the browser. A legacy direct adapter remains isolated for contract comparison,
 but it is not the default event surface.
+
+## Deployment
+
+The included `Dockerfile` pins Node.js 22.19.0 and installs the official Qloo
+harness. See [DEPLOYMENT.md](./DEPLOYMENT.md) for the hosted environment,
+credential handling, smoke test, and current transitive dependency advisory.
 
 ## API surface
 
@@ -123,7 +130,7 @@ hackathon submission has been created yet.
 
 ## Official references
 
-Requirements were checked on 2026-10-04:
+Requirements were checked on 2026-10-06:
 
 - [Qloo Agentic Hackathon overview](https://qloo.devpost.com/)
 - [Qloo official rules](https://qloo.devpost.com/rules)
